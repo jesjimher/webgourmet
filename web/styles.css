@@ -1,0 +1,48 @@
+body {
+    background-color:aliceblue;
+    font-family: sans-serif;
+    font-size: 1em;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.25em;
+}
+
+ul {
+    list-style: none;
+}
+
+#yieldunits {
+    font-size: 1em;
+    font-weight: normal;
+}
+
+div#recipedetail {
+    display:none;
+}
+
+div#recipelist ul li:hover {
+    font-weight: bold;
+    cursor:pointer;
+    list-style-type: disc;
+}
+
+input#yields {
+    width: 4em;
+}
+
+input[type=number] {
+    font-size: 1em;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+input[type=button] {
+    font-size: 1em;
+}
