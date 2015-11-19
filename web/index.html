@@ -11,7 +11,10 @@
     </head>
     <body>
         <h1 id="title">Lista de recetas</h1>
-        <div id="recipelist"></div>
+        <div id="recipelist">
+            <input type="text" id="filter" placeholder="Filtrar..."/>
+            <ul class="recipelist"></ul>
+        </div>
         <div id="recipedetail">
             <h2>Raciones: <input type="button" id="decb" class="spinbutton" value="-"><input type="number" id="yields" value=999 step="1" min="1"/><input type="button" id="incb" class="spinbutton" value="+"> <span id="yieldunits">platos</span></h2>
             <h2>Ingredientes</h2>

@@ -11,7 +11,7 @@ Typical usage of this script would be placing it in a crontab, so it generates t
 
 ### Web interface
 
-A simple web interface that displays the recipes in a nice way. It uses some AJAX to allow filtering recipes (well, not yet, work in progress right now) and quantity adjustments, just like Gourmet desktop application.
+A simple web interface that displays the recipes in a nice way. It uses some AJAX to allow filtering recipes and adjusting quantities, just like Gourmet desktop application.
 
 Just place the files in a folder inside a web server, and it should work out of the box. No server technologies (PHP, etc.) are needed, just plain HTML and Javascript.
 
