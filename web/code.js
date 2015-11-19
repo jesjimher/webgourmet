@@ -30,9 +30,8 @@ function fill_ingredients(recipeid,multiplier) {
     });
 }
 
+/* Mobile detection. Not used right now, just in case */
 var isMobile = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/));
-if (isMobile)
-    alert("Móvil");
 
 $( document ).ready(function() {
     $.getJSON("recipes.json",function(data) {
@@ -67,10 +66,26 @@ $( document ).ready(function() {
             $("#recipelist").hide(100);
             $("#recipedetail").show(100,function(){$("#title").text(recipes[id].title);});
 
-            /* Create history entry so back button closes the recipe instead of actually going back */
+            /* Create history entry so back button event can be catched, and just closes the current recipe instead of actually going back */
             history.pushState({},"recipedetail");
         });
 
+    });
+
+    /* Handler to increment/decrement yield number */
+    $("#incb").click(function(){
+        $("#yields").get(0).stepUp();
+        $("#yields").change();
+    });
+    $("#decb").click(function(){
+        $("#yields").get(0).stepDown();
+        $("#yields").change();
+    });
+
+    /* Handler for yield number change */
+    $("#yields").on("change",function(){
+        newmultiplier=parseFloat($("#yields").val().replace(",","."));
+        fill_ingredients(currentrecipe,newmultiplier);
     });
 
     /* back-button presses just goes back to recipe list */
@@ -91,10 +106,5 @@ $( document ).ready(function() {
         }
     });
 
-    /* Adjust ingredients when changing yields */
-    $("#yields").change(function(){
-        newmultiplier=$("#yields").val();
-        fill_ingredients(currentrecipe,newmultiplier);
-    });
 
 });

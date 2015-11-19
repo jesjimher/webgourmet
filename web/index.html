@@ -7,12 +7,13 @@
         <script src="fraction-0.3.js"></script>
         <script src="code.js"></script>
         <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
+        <title>Webgourmet</title>
     </head>
     <body>
         <h1 id="title">Lista de recetas</h1>
         <div id="recipelist"></div>
         <div id="recipedetail">
-            <h2>Raciones: <input type="number" id="yields" value=999 min="1"/> <span id="yieldunits">platos</span></h2>
+            <h2>Raciones: <input type="button" id="decb" class="spinbutton" value="-"><input type="number" id="yields" value=999 step="1" min="1"/><input type="button" id="incb" class="spinbutton" value="+"> <span id="yieldunits">platos</span></h2>
             <h2>Ingredientes</h2>
             <ul id="ingredients">
                 <li>

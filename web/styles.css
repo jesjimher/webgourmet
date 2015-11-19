@@ -5,12 +5,17 @@ body {
     text-align: center;
 }
 
+/*
+h1,h2,div,ul {
+    border: 1px solid;
+}*/
+
 h1 {
-    font-size: 2em;
+    font-size: 1.75em;
 }
 
 h2 {
-    font-size: 1.25em;
+    font-size: 1.1em;
 }
 
 ul {
@@ -48,10 +53,13 @@ input#yields {
 
 input[type=number] {
     font-size: 1em;
+    text-align: center;
 }
 
-input[type=number]::-webkit-inner-spin-button {
-    opacity: 1;
+/* Hide input spinner buttons */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
 }
 
 input[type=button] {
