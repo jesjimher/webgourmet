@@ -30,6 +30,10 @@ function fill_ingredients(recipeid,multiplier) {
     });
 }
 
+var isMobile = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/));
+if (isMobile)
+    alert("Móvil");
+
 $( document ).ready(function() {
     $.getJSON("recipes.json",function(data) {
         /* Re-index data by id */
