@@ -5,6 +5,11 @@
 # Path to Gourmet database
 RECIPESFILE="/home/u82066/.gourmet/recipes.db"
 
+# If recipes file path is given as a parameter, use it
+if [ $# -eq 1 ]; then
+    RECIPESFILE=$1
+fi
+
 echo "["
 recipes=()
 while read recipe; do
