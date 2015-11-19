@@ -2,6 +2,8 @@
 # Extract Gourmet recipes from SQLite DB to JSON format
 # Dependencies: csvkit (csvjson command)
 
+#TODO: Also include notes and perhaps categories
+
 # Path to Gourmet database
 RECIPESFILE="/home/u82066/.gourmet/recipes.db"
 
