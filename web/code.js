@@ -1,7 +1,7 @@
 recipes={};
 currentrecipe=0;
 
-/* Fill ingredients with specified multiplier */
+/* Fill ingredients ul with specified multiplier */
 function fill_ingredients(recipeid,multiplier) {
     original_multiplier=recipes[recipeid].yields;
     if (original_multiplier==0)
@@ -36,6 +36,7 @@ if (isMobile)
 
 $( document ).ready(function() {
     $.getJSON("recipes.json",function(data) {
+
         /* Re-index data by id */
         for(i=0;i<data.length;i++)
             recipes[data[i].id]=data[i];
@@ -65,13 +66,29 @@ $( document ).ready(function() {
             /* Switch visibility of divs, and change title */
             $("#recipelist").hide(100);
             $("#recipedetail").show(100,function(){$("#title").text(recipes[id].title);});
+
+            /* Create history entry so back button closes the recipe instead of actually going back */
+            history.pushState({},"recipedetail");
         });
+
+    });
+
+    /* back-button presses just goes back to recipe list */
+    $(window).bind('popstate',function(){
+        $("#recipedetail").hide(100);
+        $("#recipelist").show(100,function(){$("#title").text("Lista de recetas");});
     });
 
     /* Go back to recipe list */
     $("#backbutton").click(function() {
-        $("#recipedetail").hide(100);
-        $("#recipelist").show(100,function(){$("#title").text("Lista de recetas");});
+        history.back();
+    });
+
+    /* Escape key goes back to recipe list */
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) { // escape key maps to keycode `27`
+            history.back();
+        }
     });
 
     /* Adjust ingredients when changing yields */
