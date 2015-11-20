@@ -70,3 +70,10 @@ input[type=text] {
 input[type=button] {
     font-size: 1em;
 }
+
+@media (orientation:landscape) {
+    h1#title {
+        text-align:left;
+    }
+
+}
