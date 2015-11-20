@@ -14,7 +14,7 @@ fi
 
 echo "["
 recipes=()
-while read recipe; do
+while read recipe || [[ -n $recipe ]]; do
     idrecipe=$(echo $recipe | cut -d"|" -f1)
     titrecipe=$(echo $recipe | cut -d"|" -f2)
     yields=$(echo $recipe | cut -d"|" -f3)
