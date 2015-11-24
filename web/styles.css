@@ -30,7 +30,7 @@ dt {
     color: #500;
     font-size: 1.1em;
 }
-p#instructions {
+p#instructions,p#modifications {
     text-align: left;
     /*    padding: 0 10em;*/
     width: 100%;
