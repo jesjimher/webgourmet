@@ -32,6 +32,13 @@ function fill_ingredients(recipeid,multiplier) {
 
 /* Populates recipe list according to current search filter */
 function populate_list(filter) {
+    // Remember selected item id, if any
+    var selected=$("ul.recipelist li.selected");
+    var selid=null;
+    if (selected.length>0)
+        selid=selected.first().attr("id");
+
+    // Remove all recipes and re-add just those that respect the filter
     $("ul.recipelist li").remove();
     var items = [];
     $.each( recipes, function( key, val ) {
@@ -40,8 +47,15 @@ function populate_list(filter) {
     });
     $("ul.recipelist").append(items);
 
+    /* Re-select previously selected items, if any */
+    if (selid!=null)
+        $("ul.recipelist li").filter('[id="'+selid+'"]').addClass("selected");
     /* Re-bind event handlers for the new li's */
     $("li").click(activate_detail);
+    $("ul.recipelist li").mouseenter(function(e){
+        $("ul.recipelist li.selected").removeClass("selected");
+        $(e.target).addClass("selected");
+    });
 }
 
 /* Event handler for clicking in a recipe. Fills recipe info and activates recipe detail div */
@@ -122,6 +136,38 @@ $( document ).ready(function() {
 
     /* Set initial focus to filter */
     $("#filter").focus();
+
+    /* Key handlers for navigating recipe list */
+    $("body").keydown(function(e){
+        if ($("div#recipelist").is(":visible")) {
+            selec=$('ul.recipelist li.selected');
+            /* Key down */
+            if (e.which==40) {
+                if (selec.length>0) {
+                    if (selec.next().length>0) {
+                        selec.next().addClass("selected");
+                        selec.removeClass("selected");
+                    }
+                }
+                else
+                    $("ul.recipelist li").first().addClass("selected");
+            }
+            /* Key up */
+            if (e.which==38) {
+                if (selec.length>0) {
+                    if (selec.prev().length>0) {
+                        selec.prev().addClass("selected");
+                        selec.removeClass("selected");
+                    }
+                }
+            }
+            /* Enter */
+            if (e.which==13) {
+                selec.click();
+            }
+        }
+    });
+
 
 
 });

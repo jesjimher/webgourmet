@@ -41,10 +41,13 @@ div#recipedetail {
     margin: 1em auto;
 }
 
-div#recipelist ul li:hover {
-    font-weight: bold;
+div#recipelist ul li {
     cursor:pointer;
-    list-style-type: disc;
+    list-style-type: none;
+}
+
+div#recipelist ul li.selected {
+    font-weight:bold;
 }
 
 input#yields {
