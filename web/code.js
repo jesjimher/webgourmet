@@ -119,7 +119,10 @@ $( document ).ready(function() {
     /* back-button presses just goes back to recipe list */
     $(window).bind('popstate',function(){
         $("#recipedetail").hide(100);
-        $("#recipelist").show(100,function(){$("#title").text("Lista de recetas");});
+        $("#recipelist").show(100,function(){
+            $("#title").text("Lista de recetas");
+            $("#filter").focus();
+        });
     });
 
     /* Go back to recipe list */
