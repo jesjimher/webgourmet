@@ -120,5 +120,8 @@ $( document ).ready(function() {
         }
     });
 
+    /* Set initial focus to filter */
+    $("#filter").focus();
+
 
 });
