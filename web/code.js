@@ -67,6 +67,12 @@ function activate_detail(eventObject) {
     $("#yields").val(recipes[id].yields);
     $("#yieldunits").text(recipes[id].yieldunits);
     $("#instructions").html(recipes[id].instructions);
+    $("#modifications").html(recipes[id].modifications);
+    // If there're no notes, hide title
+    if (recipes[id].modifications)
+        $("#titnotes").show();
+    else
+        $("#titnotes").hide();
 
     /* Generate ingredient list */
     fill_ingredients(id,recipes[id].yields);
