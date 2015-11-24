@@ -88,6 +88,13 @@ input[type=text] {
 input[type=button] {
     font-size: 1em;
 }
+
+/* Don't use fancy fonts in low-res screens */
+@media only screen and (max-width:720px) {
+    body {
+        font-family: sans-serif;
+    }
+}
 /*
 @media (orientation:landscape) {
     h1#title {
