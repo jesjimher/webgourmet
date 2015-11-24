@@ -33,27 +33,40 @@ function fill_ingredients(recipeid,multiplier) {
 /* Populates recipe list according to current search filter */
 function populate_list(filter) {
     // Remember selected item id, if any
-    var selected=$("ul.recipelist li.selected");
+    var selected=$("dl.recipelist li.selected");
     var selid=null;
     if (selected.length>0)
         selid=selected.first().attr("id");
 
-    // Remove all recipes and re-add just those that respect the filter
-    $("ul.recipelist li").remove();
-    var items = [];
-    $.each( recipes, function( key, val ) {
-        if (val.title.toLowerCase().search(filter.toLowerCase())>=0)
-            items.push( "<li id='" + key + "'>" + val.title + "</li>" );
+    // Generate an associative array with (filtered) recipes, grouped by category
+    var categs={};
+    $.each(recipes,function(key,val) {
+        if (val.title.toLowerCase().search(filter.toLowerCase())>=0) {
+            if (!(val.category in categs))
+                categs[val.category]=[];
+            categs[val.category].push(key);
+        }
     });
-    $("ul.recipelist").append(items);
+
+    // Remove all recipes and re-add just those that respect the filter, classifying them by category
+    $("dl.recipelist dt").remove();
+    $("dl.recipelist dd").remove();
+    var items = [];
+    var usedcategs=Object.keys(categs).sort();
+    $.each(usedcategs,function(index,categname){
+        items.push("<dt>"+categname+"</dt>");
+        for(i=0;i<categs[categname].length;i++)
+            items.push( "<dd id='" + categs[categname][i] + "'>" + recipes[categs[categname][i]].title + "</dd>" );
+    });
+    $("dl.recipelist").append(items);
 
     /* Re-select previously selected items, if any */
     if (selid!=null)
         $("ul.recipelist li").filter('[id="'+selid+'"]').addClass("selected");
     /* Re-bind event handlers for the new li's */
-    $("li").click(activate_detail);
-    $("ul.recipelist li").mouseenter(function(e){
-        $("ul.recipelist li.selected").removeClass("selected");
+    $("dd").click(activate_detail);
+    $("dl.recipelist dd").mouseenter(function(e){
+        $("dl.recipelist dd.selected").removeClass("selected");
         $(e.target).addClass("selected");
     });
 }
@@ -99,7 +112,7 @@ $( document ).ready(function() {
         populate_list("");
 
         /* Activate recipe detail div when clicking on a recipe name */
-        $("li").click(activate_detail);
+        $("dd").click(activate_detail);
     });
 
     /* Handler for recipe filtering */
@@ -149,23 +162,25 @@ $( document ).ready(function() {
     /* Key handlers for navigating recipe list */
     $("body").keydown(function(e){
         if ($("div#recipelist").is(":visible")) {
-            selec=$('ul.recipelist li.selected');
+            selec=$('dl.recipelist dd.selected');
             /* Key down */
             if (e.which==40) {
                 if (selec.length>0) {
-                    if (selec.next().length>0) {
-                        selec.next().addClass("selected");
+                    nextrecipe=selec.nextAll("dd").first();
+                    if (nextrecipe.length>0) {
+                        nextrecipe.addClass("selected");
                         selec.removeClass("selected");
                     }
                 }
                 else
-                    $("ul.recipelist li").first().addClass("selected");
+                    $("dl.recipelist dd").first().addClass("selected");
             }
             /* Key up */
             if (e.which==38) {
                 if (selec.length>0) {
-                    if (selec.prev().length>0) {
-                        selec.prev().addClass("selected");
+                    prevrecipe=selec.prevAll("dd").first();
+                    if (prevrecipe.length>0) {
+                        prevrecipe.addClass("selected");
                         selec.removeClass("selected");
                     }
                 }

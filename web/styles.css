@@ -18,11 +18,18 @@ h2 {
     font-size: 1.1em;
 }
 
-ul {
+dl {
     list-style: none;
     padding: 0;
+    font-size: 1em;
 }
 
+dt {
+    font-weight: bold;
+    margin: 0.5em 0em;
+    color: #500;
+    font-size: 1.1em;
+}
 p#instructions {
     text-align: left;
     /*    padding: 0 10em;*/
@@ -41,12 +48,19 @@ div#recipedetail {
     margin: 1em auto;
 }
 
-div#recipelist ul li {
-    cursor:pointer;
-    list-style-type: none;
+#recipedetail ul {
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
 }
 
-div#recipelist ul li.selected {
+div#recipelist dl dd {
+    cursor:pointer;
+    list-style-type: none;
+    margin:0;
+}
+
+div#recipelist dl dd.selected {
     font-weight:bold;
 }
 
