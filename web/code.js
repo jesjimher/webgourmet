@@ -98,7 +98,7 @@ function activate_detail(eventObject) {
     history.pushState({},"recipedetail");
 }
 
-/* Mobile detection. Not used right now, just in case */
+/* Mobile detection */
 var isMobile = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/));
 
 $( document ).ready(function() {
@@ -140,7 +140,8 @@ $( document ).ready(function() {
         $("#recipedetail").hide(100);
         $("#recipelist").show(100,function(){
             $("#title").text("Lista de recetas");
-            $("#filter").focus();
+            if (!isMobile)
+                $("#filter").focus();
         });
     });
 
@@ -156,8 +157,9 @@ $( document ).ready(function() {
         }
     });
 
-    /* Set initial focus to filter */
-    $("#filter").focus();
+    /* On desktop, set initial focus to filter */
+    if (!isMobile)
+        $("#filter").focus();
 
     /* Key handlers for navigating recipe list */
     $("body").keydown(function(e){
