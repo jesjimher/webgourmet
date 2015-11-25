@@ -28,7 +28,7 @@ while read recipe || [[ -n $recipe ]]; do
     if [[ $ingredients ]]; then
         recipes+=("{\"id\":\"$idrecipe\",\"title\":\"$titrecipe\",\"category\":\"$category\",\"yields\":\"$yields\",\"yieldunits\":\"$yieldunits\",\"ingredients\":$ingredients,\"instructions\":\"$instructions\",\"modifications\":\"$modifications\"}")
     fi
-done < <(sqlite3 $RECIPESFILE 'select r.id,r.title,r.yields,r.yield_unit,r.instructions,r.modifications,c.category from recipe r left outer join categories c on r.id=c.recipe_id;' | sed 's/^[0-9].*/INILIN\0/g' | tr '\n' '#' | sed 's/#INILIN/INILIN/g' | sed 's/INILIN/\nINILIN/g'| sed 's/^INILIN//g' | sed '/^$/d;s/#/<br>/g')
+done < <(sqlite3 $RECIPESFILE 'select r.id,r.title,r.yields,r.yield_unit,r.instructions,r.modifications,c.category from recipe r left outer join categories c on r.id=c.recipe_id;' | sed 's/^[0-9].*/INILIN\0/g' | tr '\n' '#' | sed 's/#$//g;s/#INILIN/INILIN/g' | sed 's/INILIN/\nINILIN/g'| sed 's/^INILIN//g' | sed '/^$/d;s/#/<br>/g')
 printf -v recipelist ",%s" "${recipes[@]}"
 recipelist=${recipelist:1}
 echo $recipelist
