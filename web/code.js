@@ -92,7 +92,7 @@ function activate_detail(eventObject) {
 
     /* Switch visibility of divs, and change title */
     $("#recipelist").hide(100);
-    $("#recipedetail").show(100,function(){$("#title").text(recipes[id].title);});
+    $("#recipedetail").show(100,function(){$("header").text(recipes[id].title);});
 
     /* Create history entry so back button event can be catched, and just closes the current recipe instead of actually going back */
     history.pushState({},"recipedetail");
@@ -139,7 +139,7 @@ $( document ).ready(function() {
     $(window).bind('popstate',function(){
         $("#recipedetail").hide(100);
         $("#recipelist").show(100,function(){
-            $("#title").text("Lista de recetas");
+            $("header").text("Lista de recetas");
             if (!isMobile)
                 $("#filter").focus();
         });

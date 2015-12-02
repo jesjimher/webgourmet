@@ -10,8 +10,10 @@ h1,h2,div,ul {
     border: 1px solid;
 }*/
 
-h1 {
+header {
     font-size: 1.75em;
+    font-weight: bold;
+    margin: 0.67em 0em;
 }
 
 h2 {
